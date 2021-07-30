@@ -40,8 +40,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define USE_SERIAL
 #define SOFT_SERIAL_PIN D1
 
-//#define EE_HANDS
-#define SPLIT_HAND_PIN E6
+#define EE_HANDS
+/* #define SPLIT_HAND_PIN E6 */
 
 /* Set 0 if debouncing isn't needed */
 #define DEBOUNCE 5

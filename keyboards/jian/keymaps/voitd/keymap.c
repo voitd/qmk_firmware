@@ -2,20 +2,37 @@
 
 #define _BASE 0
 #define _SYM 1
+#define _NUM 2
 
-#define TILDA S(KC_GRV)
+#define LTRB S(KC_COMM) // <
+#define RTRB S(KC_DOT)  // >
 #define LCBRC S(KC_LBRC)
 #define RCBRC S(KC_RBRC)
 #define LRBR S(KC_9)
 #define RRBR S(KC_0)
 
+#define SCRNSHT G(S(KC_5))
+#define AREASHT G(S(KC_4))
+#define ALLSHT G(S(KC_3))
+
+#define WIN_L G(S(KC_LEFT))
+#define WIN_R G(S(KC_RGHT))
+#define WIN_CTR LSA(KC_ENT)
+#define WIN_FLL LSA(KC_T)
+#define WIN_WIDE LSA(KC_W)
+
+#define ALF G(KC_SPC)
+
+#define TILDA S(KC_GRV)
 #define COL S(KC_SCLN)
 
 #define CMD_TAB CMD_T(KC_TAB)
 #define CTL_TAB CTL_T(KC_TAB)
 #define SHFT_ENT SFT_T(KC_ENT)
+#define CTL_ESC CTL_T(KC_ESC)
 #define SHFT_ESC SFT_T(KC_ESC)
 
+#define NUM_BSPC LT(_NUM, KC_BSPC)
 #define SYM_BSPC LT(_SYM, KC_BSPC)
 #define SYM_SPC LT(_SYM, KC_SPC)
 
@@ -23,26 +40,36 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 [_BASE] = LAYOUT(
 // ---------+---------+---------+---------+---------+---------+---------                      ---------+---------+---------+---------+---------+---------+---------
-    RESET   , KC_GRV  , KC_Q    , KC_W    , KC_F    , KC_P    , KC_G    ,                      KC_J    , KC_L    , KC_U    , KC_Y    , KC_QUOT , KC_F12  , _______ ,
+    RESET   , _______ , KC_Q    , KC_W    , KC_F    , KC_P    , KC_G    ,                      KC_J    , KC_L    , KC_U    , KC_Y    , KC_QUOT , _______ ,  ALF   ,
 // ---------+---------+---------+---------+---------+---------+---------                      ---------+---------+---------+---------+---------+---------+---------
-              KC_LBRC , KC_A    , KC_R    , KC_S    , KC_T    , KC_D    ,                      KC_H    , KC_N    , KC_E    , KC_I    , KC_O    , KC_RBRC ,
+              _______ , KC_A    , KC_R    , KC_S    , KC_T    , KC_D    ,                      KC_H    , KC_N    , KC_E    , KC_I    , KC_O    , _______ ,
 // ---------+---------+---------+---------+---------+---------+---------                      ---------+---------+---------+---------+---------+---------+---------
-              _______ , KC_Z    , KC_X    , KC_C    , KC_V    , KC_B    ,                      KC_K    , KC_M    ,KC_COMM  , KC_DOT  , KC_SLSH , KC_BSLS ,
+              _______ , KC_Z    , KC_X    , KC_C    , KC_V    , KC_B    ,                      KC_K    , KC_M    ,KC_COMM  , KC_DOT  , KC_SLSH , _______ ,
 // ---------+---------+---------+---------+---------+---------+---------                      ---------+---------+---------+---------+---------+---------+---------
-                                                      CMD_TAB , SYM_BSPC, SHFT_ENT,  SHFT_ESC, SYM_SPC , CTL_TAB
+                                                      CMD_TAB , NUM_BSPC, SHFT_ESC,  SHFT_ENT, SYM_SPC , CTL_ESC
 //                                                   ---------+---------+---------  ---------+---------+---------
 ),
 [_SYM] = LAYOUT(
 // ---------+---------+---------+---------+---------+---------+---------                      ---------+---------+---------+---------+---------+---------+---------
-  C(KC_LEFT), _______ , _______ , _______ ,   COL   , KC_MINUS,S(KC_COMM),                    S(KC_DOT), KC_EQL , KC_SCLN , _______ , _______ , _______ ,C(KC_RIGHT),
+  C(KC_LEFT), AREASHT , KC_TILD ,   COL   , KC_LBRC ,  LTRB   , _______ ,                        COL   ,  RTRB   , KC_RBRC , KC_QUES , KC_GRV  , WIN_CTR ,C(KC_RIGHT),
 // ---------+---------+---------+---------+---------+---------+---------                      ---------+---------+---------+---------+---------+---------+---------
-               KC_1   ,   KC_2  , KC_3    , KC_4    , KC_5    , S(KC_9) ,                       S(KC_0),   KC_6  ,  KC_7   ,  KC_8   , KC_9    , KC_0    ,
+              SCRNSHT , KC_UNDS , KC_PLUS , KC_LPRN , KC_LCBR , _______ ,                       KC_EQL , KC_RCBR , KC_RPRN , KC_MINS , KC_SCLN , WIN_WIDE,
 // ---------+---------+---------+---------+---------+---------+---------                      ---------+---------+---------+---------+---------+---------+---------
-              S(KC_1) , S(KC_2) , S(KC_3) , S(KC_4) , S(KC_5) , KC_LBRC ,                       KC_RBRC, S(KC_6) , S(KC_7) , S(KC_8) , S(KC_9) , S(KC_0),
+              ALLSHT  , KC_EXLM ,  KC_AT  , KC_HASH , KC_DLR  , KC_PERC ,                      _______ , KC_AMPR , KC_ASTR , KC_CIRC , KC_BSLS , WIN_FLL ,
 // ---------+---------+---------+---------+---------+---------+---------                      ---------+---------+---------+---------+---------+---------+---------
-                                                       KC_UP  , _______ , KC_DOWN,   KC_LEFT ,  _______ , KC_RIGHT
+                                                      _______ , _______ , _______,   _______ , _______ , _______
+//                                                   ---------+---------+---------  ---------+---------+---------
+),
+[_NUM] = LAYOUT(
+// ---------+---------+---------+---------+---------+---------+---------                      ---------+---------+---------+---------+---------+---------+---------
+    _______ ,  WIN_L  ,  KC_1   ,  KC_2   ,  KC_3   ,  KC_4   ,  KC_5   ,                        KC_6  ,  KC_7   ,  KC_8   , KC_9    , KC_0    ,  WIN_R  , _______ ,
+// ---------+---------+---------+---------+---------+---------+---------                      ---------+---------+---------+---------+---------+---------+---------
+              _______ , _______ , _______ , _______ , _______ , _______ ,                      KC_LEFT ,  KC_UP  , KC_DOWN , KC_RIGHT, _______ , _______ ,
+// ---------+---------+---------+---------+---------+---------+---------                      ---------+---------+---------+---------+---------+---------+---------
+              _______ , S(KC_1) , S(KC_2) , S(KC_3) , S(KC_4) , S(KC_5) ,                      S(KC_6) , S(KC_7) , S(KC_8) , S(KC_9) , S(KC_0) , _______ ,
+// ---------+---------+---------+---------+---------+---------+---------                      ---------+---------+---------+---------+---------+---------+---------
+                                                      _______ , _______ , _______ ,  _______ , _______ , _______
 //                                                   ---------+---------+---------  ---------+---------+---------
 ),
 };
-
 

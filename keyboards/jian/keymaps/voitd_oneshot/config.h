@@ -19,6 +19,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 #pragma once
 
+#define ONESHOT_TAP_TOGGLE 3
+#define ONESHOT_TIMEOUT 1500
+
 #define IGNORE_MOD_TAP_INTERRUPT
-#define TAPPING_TERM 140
+#define TAPPING_TERM 160
 #define TAPPING_TERM_PER_KEY
