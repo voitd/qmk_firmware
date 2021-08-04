@@ -9,8 +9,8 @@ extern uint8_t is_master;
 // entirely and just use numbers.
 
 #define _COLEMAK 0
-#define _NUM 1
-#define _SYM 2
+#define _SYM 1
+#define _FUNC 2
 
 #define LTRB S(KC_COMM) // <
 #define RTRB S(KC_DOT)  // >
@@ -62,71 +62,47 @@ extern uint8_t is_master;
 #define LA_NUM MO(_NUM)
 
 #define OS_SYM OSL(_SYM)
+#define OS_FUN OSL(_FUNC)
 #define OS_NUM OSL(_NUM)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-  [_COLEMAK] = LAYOUT_split_3x6_3( \
+  [_COLEMAK] = LAYOUT_split_3x6_3(
 
 // ---------+---------+---------+---------+---------+---------                      ---------+---------+---------+---------+---------+---------
-    OS_SYM  , KC_Q    , KC_W    , KC_F    , KC_P    , KC_G    ,                       KC_J   ,   KC_L  , KC_U    , KC_Y    , KC_QUOT , OS_NUM ,
+     OS_FUN , KC_Q    , KC_W    , KC_F    , KC_P    , KC_G    ,                       KC_J   ,  KC_L   , KC_U    , KC_Y    , KC_QUOT , OS_FUN ,
 // ---------+---------+---------+---------+---------+---------                      ---------+---------+---------+---------+---------+---------
-    _______ , KC_A    , KC_R    , KC_S    , KC_T    , KC_D    ,                       KC_H   ,  N_NUM  , KC_E    , KC_I    , KC_O    , KC_SCLN,
+    RGB_MOD , KC_A    , KC_R    , KC_S    , KC_T    , KC_D    ,                       KC_H   ,  KC_N   , KC_E    , KC_I    , KC_O    , KC_SCLN,
 // ---------+---------+---------+---------+---------+---------                      ---------+---------+---------+---------+---------+---------
-   SHCTL_ENT, KC_Z    , KC_X    , KC_C    , KC_V    , KC_B    ,                       KC_K   ,   KC_M  ,KC_COMM  , KC_DOT  , KC_SLSH , OS_NUM,
+   SHCTL_ENT, KC_Z    , KC_X    , KC_C    , KC_V    , KC_B    ,                       KC_K   ,  KC_M   , KC_COMM , KC_DOT  , KC_SLSH ,   ALF  ,
 // ---------+---------+---------+---------+---------+---------                      ---------+---------+---------+---------+---------+---------
                                             CMD_TAB , SYM_BSPC, SHFT_ENT,  SHFT_ENT, SYM_SPC , CTL_ESC
 //                                         ---------+---------+---------  ---------+---------+---------
 ),
-  [_NUM] = LAYOUT_split_3x6_3( \
+  [_SYM] = LAYOUT_split_3x6_3(
 
-// ---------+---------+---------+---------+---------+---------                     ---------+---------+---------+---------+---------+----------
-    RGB_TOG , RGB_SAI , _______ ,  KC_1   ,  KC_2   ,  KC_3                         _______ , _______ , _______ , _______ ,  KC_0   , WIN_FLL ,
-// ---------+---------+---------+---------+---------+---------                     ---------+---------+---------+---------+---------+----------
-    RGB_HUI , _______ ,  KC_0   ,  KC_4   ,  KC_5   ,  KC_6                         _______ , _______ , _______ , _______ , _______ , WIN_CTR ,
-// ---------+---------+---------+---------+---------+---------                     ---------+---------+---------+---------+---------+----------
-    RGB_HUD , RGB_SAD , _______ ,  KC_7   ,  KC_8   ,  KC_9                         _______ , _______ , _______ , _______ , _______ , WIN_WIDE,
-// ---------+---------+---------+---------+---------+---------                     ---------+---------+---------+---------+---------+----------
-                                            KC_LGUI , _______ ,  KC_0  ,  KC_RSFT , KC_RALT , KC_RCTL
+// +---------+---------+--------+---------+---------+---------                     ---------+---------+---------+---------+---------+----------
+      KC_1   ,  KC_2   ,  KC_3  , KC_LPRN , KC_LCBR , KC_PLUS ,                     KC_MINS , KC_RCBR , KC_RPRN , KC_TILD , KC_GRV  , KC_ASTR ,
+// +---------+---------+--------+---------+---------+---------                     ---------+---------+---------+---------+---------+----------
+      KC_4   ,  KC_5   ,  KC_6  ,  KC_0   , KC_EQL  , _______ ,                     KC_LEFT ,  KC_UP  , KC_DOWN , KC_RIGHT, KC_DLR  , KC_EXLM ,
+// +---------+---------+--------+---------+---------+---------                     ---------+---------+---------+---------+---------+----------
+      KC_7   ,  KC_8   ,  KC_9  , KC_LBRC ,  LTRB   , _______ ,                     KC_UNDS ,   RTRB  , KC_RBRC , KC_AMPR , KC_PIPE , KC_AMPR ,
+// +---------+---------+--------+---------+---------+---------                     ---------+---------+---------+---------+---------+----------
+                                            KC_LGUI , _______ , KC_RSFT,   KC_RSFT , _______ , KC_RCTL
 //                                         ---------+---------+---------  ---------+---------+---------
 ),
-  [_SYM] = LAYOUT_split_3x6_3( \
-// ---------+---------+---------+---------+---------+---------                      ---------+---------+---------+---------+---------+----------
-    AREASHT , _______ ,   COL   , KC_LPRN , KC_LCBR , KC_PLUS ,                      KC_MINS , KC_RCBR , KC_RPRN , KC_ASTR , KC_GRV  , KC_TILD ,
-// ---------+---------+---------+---------+---------+---------                      ---------+---------+---------+---------+---------+----------
-    SCRNSHT , _______ , KC_DLR  , KC_PERC , KC_EQL  , KC_TAB  ,                      KC_LEFT ,  KC_UP  , KC_DOWN , KC_RIGHT, KC_SCLN , _______ ,
-// ---------+---------+---------+---------+---------+---------                      ---------+---------+---------+---------+---------+----------
-    ALLSHT  , KC_EXLM ,  KC_AT  , KC_LBRC ,  LTRB   , KC_DOT  ,                      KC_UNDS ,   RTRB  , KC_RBRC , KC_AMPR , KC_PIPE , _______ ,
-// ---------+---------+---------+---------+---------+---------                      ---------+---------+---------+---------+---------+----------
-                                            _______ , _______ , _______,  SHCTL_ENT, _______ , _______
+  [_FUNC] = LAYOUT_split_3x6_3(
+// ---------+---------+---------+--------+---------+---------+                      ---------+---------+---------+--------+---------+----------
+    AREASHT , _______ ,   COL   , _______ , _______ , _______ ,                       _______ , _______ , _______ , RGB_HUI, RGB_SAI , WIN_FLL ,
+// ---------+---------+------------------+---------+----------                      ---------+---------+------------------+---------+----------
+    SCRNSHT , _______ , _______ , _______ , _______ , _______ ,                       _______ , _______ , _______ , RGB_MOD, RGB_TOG , WIN_CTR ,
+// ---------+---------+------------------+---------+----------                      ---------+---------+------------------+---------+----------
+    ALLSHT  , _______ , _______ , _______ , _______ , _______ ,                       _______ , _______ , _______ , RGB_HUD, RGB_SAD , WIN_WIDE,
+// ---------+---------+------------------+---------+----------                      ---------+---------+------------------+---------+----------
+                                            _______ , _______ , _______,    _______, _______ , _______
 //                                         ---------+---------+---------  ---------+---------+---------
-
 ),
+
 };
-
-uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
-    switch (keycode) {
-        case L_BSPC:
-            return TAPPING_TERM + 70;
-        case R_SPC:
-            return TAPPING_TERM + 70;
-        case B_BSPC:
-            return TAPPING_TERM + 70;
-        case B_SPC:
-            return TAPPING_TERM + 70;
-        case CMD_TAB:
-            return TAPPING_TERM + 70;
-        case S_ENT:
-            return TAPPING_TERM + 70;
-        case S_ESC:
-            return TAPPING_TERM + 70;
-        default:
-            return TAPPING_TERM;
-    }
-}
-
-uint32_t layer_state_set_user(uint32_t state) {
-  return update_tri_layer_state(state, _NUM, _SYM);
-}
 
 const char *read_logo(void);
 #ifdef OLED_DRIVER_ENABLE
@@ -140,13 +116,13 @@ void render_qmk_and_layer(void) {
 
     switch (get_highest_layer(layer_state)) {
         case _COLEMAK:
-            oled_write_P(PSTR("_______COLEMAK_______"), false);
+            oled_write_P(PSTR("      COLEMAK       "), false);
             break;
-        case _NUM:
-            oled_write_P(PSTR("________NUMBER________"), false);
+        case _FUNC:
+            oled_write_P(PSTR("      FUNCTION      "), false);
             break;
         case _SYM:
-            oled_write_P(PSTR("________SYMBOL_______"), false);
+            oled_write_P(PSTR("      SYMBOL        "), false);
             break;
         default:
             oled_write_ln_P(PSTR("Undefined"), false);

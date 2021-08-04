@@ -11,3 +11,4 @@ SRC +=  ./lib/glcdfont.c \
 
 OLED_DRIVER_ENABLE = yes
 RGBLIGHT_ENABLE = yes
+LTO_ENABLE = yes
